@@ -4,7 +4,10 @@ name: keepawake
 # free/unlimited, so this costs nothing. Change RUNNER_URL if the service is renamed.
 on:
   schedule:
+    # two interleaved schedules -> a ping lands roughly every 2.5 minutes. Render free instances sleep
+    # after 15 idle minutes and GitHub cron can be delayed a few minutes, so this keeps the runner up.
     - cron: "*/5 * * * *"
+    - cron: "2,7,12,17,22,27,32,37,42,47,52,57 * * * *"
   workflow_dispatch: {}
   push:
     paths: [".github/workflows/keepawake.yml"]
